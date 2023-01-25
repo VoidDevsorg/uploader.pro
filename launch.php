@@ -6,5 +6,5 @@
         $_SESSION['token'] = md5(time() . rand(0, 1000000));
     }
 
-    // error_reporting(0);
+    error_reporting(0);
 ?>
