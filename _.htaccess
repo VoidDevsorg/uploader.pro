@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteRule ^launch(.*)$ - [R=404,L]
+RewriteRule ^static\/(.*)$ - [R=404,L]
+RewriteRule ^functions\/(.*)$ - [R=404,L]
+RewriteRule ^view\/(.*)$ - [R=404,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L] 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Create FAKE URLS
+RewriteRule ^([a-zA-Z0-9]) index.php?page=$1 [NC,L]
+
+# 404 error page
+ErrorDocument 404 /404.php
+
+# Fake Sub-Domain
+# i.domain.com -> view.php
+RewriteCond %{HTTP_HOST} ^i\.(.*)$ [NC]
+RewriteRule ^(.*)$ view.php?i=$1 [NC,L]
