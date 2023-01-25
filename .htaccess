@@ -14,9 +14,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([a-zA-Z0-9]) index.php?page=$1 [NC,L]
 
 # 404 error page
-ErrorDocument 404 /404.php
+ErrorDocument 404 /index.php?page=home
 
-# Fake Sub-Domain
+# cdn.anydomain.com -> view.php
+RewriteCond %{HTTP_HOST} ^cdn\.(.*)$ [NC]
+RewriteRule ^(.*)$ view.php?i=$1 [NC,L]
+
 # i.domain.com -> view.php
 RewriteCond %{HTTP_HOST} ^i\.(.*)$ [NC]
 RewriteRule ^(.*)$ view.php?i=$1 [NC,L]
